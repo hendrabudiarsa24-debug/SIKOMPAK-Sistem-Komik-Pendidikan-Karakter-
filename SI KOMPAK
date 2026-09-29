@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SI KOMPAK - SD Negeri Pilang 1</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Canvas Confetti for Reward Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#E53935',
+                            darkred: '#C62828',
+                            lightred: '#FFEBEE',
+                            accent: '#FF5252',
+                            gold: '#FFC107'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        fredoka: ['Fredoka', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth Morphing & Transition Keyframes */
+        .morph-element {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .fade-in-scale {
+            animation: fadeInScale 0.35s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.94) translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar for Reading Mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F1F1;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E53935;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C62828;
+        }
+
+        /* Gradient Glass Effects */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 57, 53, 0.15);
+        }
+
+        .floating-bubble {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-brand-red selection:text-white">
+
+    <!-- Dynamic Alert/Toast Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- LOGIN PAGE VIEW -->
+    <div id="login-page" class="min-h-screen bg-gradient-to-br from-red-600 via-brand-red to-rose-700 flex flex-col justify-between p-4 sm:p-6 md:p-10 relative overflow-hidden">
+        
+        <!-- Background Animated Bubbles -->
+        <div class="absolute -top-20 -left-20 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none floating-bubble"></div>
+        <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-brand-gold/20 rounded-full blur-3xl pointer-events-none floating-bubble" style="animation-delay: -3s;"></div>
+
+        <!-- Top Branding Header -->
+        <div class="text-center text-white mb-6 z-10 fade-in-scale">
+            <div class="inline-flex items-center justify-center p-3 bg-white/10 backdrop-blur-md rounded-2xl mb-3 border border-white/20 shadow-lg">
+                <i data-lucide="book-open-check" class="w-10 h-10 text-yellow-300 mr-3"></i>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-fredoka font-bold tracking-wide text-white drop-shadow">
+                    APLIKASI SI KOMPAK
+                </h1>
+            </div>
+            <p class="text-rose-100 text-sm sm:text-base md:text-lg font-medium tracking-wide">
+                (Sistem Komik Pendidikan Karakter) • <span class="bg-yellow-400 text-red-900 font-bold px-3 py-1 rounded-full shadow-inner">SD Negeri Pilang 1</span>
+            </p>
+        </div>
+
+        <!-- 2 Column Login Box -->
+        <div class="max-w-4xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 my-auto z-10 fade-in-scale">
+            
+            <!-- COLUMN 1: GURU / ADMIN -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border-2 border-brand-red/20 hover:border-brand-red/50 transition-all group">
+                <div class="absolute top-0 right-0 bg-brand-red text-white text-xs font-bold px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider flex items-center gap-1">
+                    <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Akses Editor
+                </div>
+                
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="p-3 bg-red-100 text-brand-red rounded-2xl group-hover:scale-110 transition-transform">
+                        <i data-lucide="user-cog" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold font-fredoka text-slate-900">Portal Guru / Admin</h2>
+                        <p class="text-xs text-slate-500">Kelola & Unggah Komik Karakter</p>
+                    </div>
+                </div>
+
+                <form id="guru-login-form" onsubmit="handleGuruLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Nama Pengguna / Sekolah</label>
+                        <div class="relative">
+                            <i data-lucide="school" class="w-5 h-5 absolute left-3.5 top-3 text-slate-400"></i>
+                            <input type="text" value="SDN PILANG 1" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl py-2.5 pl-11 pr-4 text-sm font-semibold text-slate-700 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Password Sandi Guru</label>
+                        <div class="relative">
+                            <i data-lucide="key-round" class="w-5 h-5 absolute left-3.5 top-3 text-slate-400"></i>
+                            <input type="password" id="guru-password" placeholder="Masukkan password (Pilang1)" required class="w-full bg-white border border-slate-300 rounded-xl py-2.5 pl-11 pr-11 text-sm text-slate-800 focus:ring-2 focus:ring-brand-red focus:border-brand-red outline-none transition">
+                            <button type="button" onclick="togglePasswordVisibility('guru-password', 'eye-icon')" class="absolute right-3.5 top-2.5 text-slate-400 hover:text-slate-600">
+                                <i id="eye-icon" data-lucide="eye" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1 italic">*Gunakan kata sandi "Pilang1" untuk login</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-brand-red to-rose-600 hover:from-brand-darkred hover:to-rose-700 text-white font-semibold py-3 rounded-xl shadow-lg shadow-red-500/30 hover:shadow-red-500/50 transition-all flex items-center justify-center gap-2 group-hover:translate-y-[-1px]">
+                        <span>Masuk Mode Guru</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- COLUMN 2: SISWA & ORANG TUA -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border-2 border-emerald-500/20 hover:border-emerald-500/50 transition-all group">
+                <div class="absolute top-0 right-0 bg-emerald-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-2xl uppercase tracking-wider flex items-center gap-1">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Akses Publik
+                </div>
+
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="p-3 bg-emerald-100 text-emerald-600 rounded-2xl group-hover:scale-110 transition-transform">
+                        <i data-lucide="users" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold font-fredoka text-slate-900">Siswa & Orang Tua</h2>
+                        <p class="text-xs text-slate-500">Baca Komik Digital & Panduan Karakter</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-2">
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Akses cepat langsung tanpa password untuk seluruh Murid dan Orang Tua/Wali murid SD Negeri Pilang 1. Pilih tujuan akses Anda di bawah:
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <button onclick="loginAsRole('SISWA')" class="bg-gradient-to-br from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-slate-900 font-bold p-3.5 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col items-center justify-center text-center gap-1 group/btn">
+                            <i data-lucide="smile" class="w-7 h-7 text-white group-hover/btn:scale-110 transition-transform"></i>
+                            <span class="text-sm text-white">Portal SISWA</span>
+                            <span class="text-[10px] text-amber-100 font-normal">Baca Komik Seru</span>
+                        </button>
+
+                        <button onclick="loginAsRole('ORTU')" class="bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold p-3.5 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col items-center justify-center text-center gap-1 group/btn">
+                            <i data-lucide="heart-handshake" class="w-7 h-7 text-blue-200 group-hover/btn:scale-110 transition-transform"></i>
+                            <span class="text-sm">Portal ORANG TUA</span>
+                            <span class="text-[10px] text-blue-100 font-normal">Panduan & Refleksi</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Footer -->
+        <div class="text-center text-white/90 text-xs sm:text-sm font-medium z-10 pt-4 border-t border-white/10">
+            Aplikasi ini dikembangkan oleh <span class="font-bold underline decoration-yellow-400 decoration-2">SDN PILANG 1</span> © 2026
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD VIEW (Hidden by default) -->
+    <div id="main-app" class="hidden min-h-screen flex-col bg-slate-50">
+        
+        <!-- Top Navbar Header -->
+        <header class="bg-gradient-to-r from-brand-red via-red-600 to-rose-700 text-white sticky top-0 z-30 shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                
+                <!-- Logo & Brand Info -->
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-white/10 backdrop-blur rounded-xl border border-white/20">
+                        <i data-lucide="book-open text-yellow-300" class="w-7 h-7 sm:w-8 sm:h-8"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="font-fredoka text-xl sm:text-2xl font-bold tracking-wide">SI KOMPAK</h1>
+                            <span id="role-badge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-yellow-400 text-red-950 uppercase tracking-wider">ROLE</span>
+                        </div>
+                        <p class="text-xs text-rose-100 hidden sm:block">SD Negeri Pilang 1 • Portal Komik Digital Karakter</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs (Desktop) -->
+                <nav class="hidden md:flex items-center bg-black/15 p-1.5 rounded-2xl backdrop-blur-sm border border-white/10" id="desktop-tab-nav">
+                    <!-- Dynamic Tabs Inserted Here -->
+                </nav>
+
+                <!-- User Session & Logout -->
+                <div class="flex items-center space-x-3">
+                    <div class="text-right hidden sm:block">
+                        <p id="user-display-name" class="text-xs font-semibold text-white">Siswa SDN Pilang 1</p>
+                        <p class="text-[10px] text-rose-200">Aktif Bersekolah</p>
+                    </div>
+                    <button onclick="logout()" title="Keluar / Ganti Akses" class="p-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl transition border border-white/20 flex items-center gap-1.5 text-xs font-semibold">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Ganti Role</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Mobile Navigation Bar Below Header -->
+            <div class="md:hidden bg-red-800/60 backdrop-blur px-4 py-2 flex items-center justify-around border-t border-white/10 overflow-x-auto" id="mobile-tab-nav">
+                <!-- Dynamic Mobile Tabs -->
+            </div>
+        </header>
+
+        <!-- Dynamic Main Content Area -->
+        <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+            
+            <!-- TAB CONTENT: SISWA PORTAL -->
+            <section id="tab-siswa" class="tab-content morph-element hidden">
+                
+                <!-- Hero Header Banner -->
+                <div class="bg-gradient-to-r from-amber-400 via-orange-400 to-rose-500 rounded-3xl p-6 sm:p-8 text-white shadow-xl mb-8 relative overflow-hidden">
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold text-white mb-3">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-yellow-200"></i> Selamat Datang, Sahabat Pilang!
+                        </span>
+                        <h2 class="text-2xl sm:text-4xl font-fredoka font-bold text-slate-900 mb-2">Yuk, Baca Komik Karakter Pancasila Hari Ini!</h2>
+                        <p class="text-slate-800 text-sm sm:text-base font-medium">Pilih komik favoritmu berdasarkan kelas dan petualangan seru yang kamu sukai!</p>
+                    </div>
+                    <i data-lucide="smile" class="absolute -bottom-6 -right-6 w-48 h-48 text-white/20 pointer-events-none"></i>
+                </div>
+
+                <!-- Phase Filter Tabs -->
+                <div class="flex items-center justify-between flex-wrap gap-4 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold font-fredoka text-slate-800 flex items-center gap-2">
+                            <i data-lucide="filter" class="w-5 h-5 text-brand-red"></i> Filter Tingkat Kelas
+                        </h3>
+                        <p class="text-xs text-slate-500">Pilih Fase belajar untuk menampilkan komik yang cocok</p>
+                    </div>
+
+                    <!-- Filter Buttons Group -->
+                    <div class="flex items-center gap-1.5 bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm overflow-x-auto max-w-full">
+                        <button onclick="filterPhase('ALL')" id="filter-btn-ALL" class="phase-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-red text-white shadow">
+                            Semua Fase
+                        </button>
+                        <button onclick="filterPhase('FASE_A')" id="filter-btn-FASE_A" class="phase-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:bg-slate-100">
+                            Fase A (Kelas 1-2)
+                        </button>
+                        <button onclick="filterPhase('FASE_B')" id="filter-btn-FASE_B" class="phase-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:bg-slate-100">
+                            Fase B (Kelas 3-4)
+                        </button>
+                        <button onclick="filterPhase('FASE_C')" id="filter-btn-FASE_C" class="phase-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:bg-slate-100">
+                            Fase C (Kelas 5-6)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Comic Grid Catalog -->
+                <div id="comic-grid-siswa" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Dynamic Comics Inserted via JS -->
+                </div>
+
+                <!-- Empty State Message -->
+                <div id="empty-siswa-comics" class="hidden text-center py-16 bg-white rounded-3xl border-2 border-dashed border-slate-200 p-8">
+                    <i data-lucide="book-open" class="w-16 h-16 text-slate-300 mx-auto mb-3"></i>
+                    <h4 class="text-lg font-bold text-slate-700 font-fredoka">Belum Ada Komik Di Fase Ini</h4>
+                    <p class="text-sm text-slate-500 max-w-md mx-auto mt-1">Bapak/Ibu Guru akan segera mengunggah karya komik karakter menarik untuk fase ini!</p>
+                </div>
+
+            </section>
+
+            <!-- TAB CONTENT: GURU PORTAL -->
+            <section id="tab-guru" class="tab-content morph-element hidden">
+                
+                <!-- Guru Header Summary -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold font-fredoka text-slate-900 flex items-center gap-2">
+                        <i data-lucide="layout-dashboard" class="w-7 h-7 text-brand-red"></i> Dashboard Pengelolaan Komik Digital
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600">Unggah komik pelajaran karakter baru, atur rekapitulasi, dan kelola karya komik siswa.</p>
+                </div>
+
+                <!-- Guru Statistics Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-gradient-to-br from-red-500 to-rose-600 p-5 rounded-2xl text-white shadow-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-rose-100 font-medium">Total Komik Terunggah</p>
+                            <h3 id="stat-total-komik" class="text-3xl font-fredoka font-bold mt-1">0</h3>
+                        </div>
+                        <div class="p-3 bg-white/20 backdrop-blur rounded-xl">
+                            <i data-lucide="book-marked" class="w-7 h-7"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-blue-500 to-indigo-600 p-5 rounded-2xl text-white shadow-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-blue-100 font-medium">Komik Fase A (Kelas 1-2)</p>
+                            <h3 id="stat-fase-a" class="text-3xl font-fredoka font-bold mt-1">0</h3>
+                        </div>
+                        <div class="p-3 bg-white/20 backdrop-blur rounded-xl">
+                            <i data-lucide="shapes" class="w-7 h-7"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-amber-500 to-orange-600 p-5 rounded-2xl text-white shadow-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-amber-100 font-medium">Komik Fase B (Kelas 3-4)</p>
+                            <h3 id="stat-fase-b" class="text-3xl font-fredoka font-bold mt-1">0</h3>
+                        </div>
+                        <div class="p-3 bg-white/20 backdrop-blur rounded-xl">
+                            <i data-lucide="sparkles" class="w-7 h-7"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-emerald-500 to-teal-600 p-5 rounded-2xl text-white shadow-lg flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-emerald-100 font-medium">Komik Fase C (Kelas 5-6)</p>
+                            <h3 id="stat-fase-c" class="text-3xl font-fredoka font-bold mt-1">0</h3>
+                        </div>
+                        <div class="p-3 bg-white/20 backdrop-blur rounded-xl">
+                            <i data-lucide="award" class="w-7 h-7"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- FORM UNGGAH KOMIK BARU (7 COLS) -->
+                    <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200">
+                        <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+                            <div class="p-3 bg-red-100 text-brand-red rounded-2xl">
+                                <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold font-fredoka text-slate-800">Formulir Publikasi Komik Baru</h3>
+                                <p class="text-xs text-slate-500">Isi detail komik dan upload gambar dari perangkat</p>
+                            </div>
+                        </div>
+
+                        <form id="upload-comic-form" onsubmit="handleComicUpload(event)" class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Judul Komik Karakter *</label>
+                                <input type="text" id="comic-title" placeholder="Contoh: Petualangan Budi Belajar Kejujuran" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-brand-red focus:bg-white outline-none transition">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Target Fase / Kelas *</label>
+                                    <select id="comic-phase" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-brand-red focus:bg-white outline-none transition font-medium">
+                                        <option value="FASE_A">Fase A (Kelas 1-2)</option>
+                                        <option value="FASE_B">Fase B (Kelas 3-4)</option>
+                                        <option value="FASE_C">Fase C (Kelas 5-6)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Pengarang / Kreator *</label>
+                                    <input type="text" id="comic-author" placeholder="Nama Guru / Penyusun" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-brand-red focus:bg-white outline-none transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nilai Karakter Pancasila *</label>
+                                <textarea id="comic-description" rows="2" placeholder="Jelaskan nilai karakter yang diajarkan (Contoh: Gotong Royong & Saling Menghargai)" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-brand-red focus:bg-white outline-none transition"></textarea>
+                            </div>
+
+                            <!-- Multiple File Upload -->
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                                    Unggah Berkas Halaman Komik (JPG/PNG) *
+                                </label>
+                                <div class="border-2 border-dashed border-slate-300 hover:border-brand-red rounded-2xl p-6 text-center bg-slate-50 hover:bg-red-50/50 transition cursor-pointer relative" onclick="document.getElementById('comic-files').click()">
+                                    <input type="file" id="comic-files" accept="image/png, image/jpeg, image/jpg" multiple onchange="handleFilePreview(event)" class="hidden">
+                                    <i data-lucide="image-plus" class="w-10 h-10 text-brand-red mx-auto mb-2"></i>
+                                    <p class="text-xs font-bold text-slate-700">Klik untuk memilih beberapa gambar sekaligus</p>
+                                    <p class="text-[11px] text-slate-400 mt-1">Format gambar JPG atau PNG. Gambar pertama akan menjadi sampul komik.</p>
+                                </div>
+                            </div>
+
+                            <!-- Real-time Image Preview Area -->
+                            <div id="preview-area-container" class="hidden space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Preview Halaman Terpilih (<span id="preview-count">0</span>):</h4>
+                                    <span class="text-[11px] text-brand-red font-semibold">★ Gambar #1 = Sampul Komik</span>
+                                </div>
+                                <div id="preview-thumbnails-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                                    <!-- Dynamic Thumbnails -->
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-brand-red to-rose-600 hover:from-brand-darkred hover:to-rose-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-red-500/30 transition flex items-center justify-center gap-2">
+                                <i data-lucide="save" class="w-5 h-5"></i>
+                                <span>Simpan & Terbitkan Komik</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- TABEL / DAFTAR REKAP KOMIK (5 COLS) -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-200">
+                            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+                                <h3 class="text-lg font-bold font-fredoka text-slate-800 flex items-center gap-2">
+                                    <i data-lucide="list" class="w-5 h-5 text-brand-red"></i> Daftar Komik Aktif
+                                </h3>
+                                <span class="text-xs text-slate-400">Total: <span id="rekap-count" class="font-bold text-slate-700">0</span></span>
+                            </div>
+
+                            <!-- List Table Container -->
+                            <div class="space-y-3 max-h-[520px] overflow-y-auto pr-1" id="guru-comics-list">
+                                <!-- Dynamic List Items -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- TAB CONTENT: ORANG TUA PORTAL -->
+            <section id="tab-ortu" class="tab-content morph-element hidden">
+                
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold font-fredoka text-slate-900 flex items-center gap-2">
+                        <i data-lucide="heart-handshake" class="w-7 h-7 text-blue-600"></i> Portal Pendampingan Orang Tua
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600">Panduan pertanyaan diskusi Pancasila di rumah dan form pencatatan perkembangan karakter buah hati.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- PANDUAN PERTANYAAN PEMANTIK (6 COLS) -->
+                    <div class="lg:col-span-6 bg-gradient-to-br from-blue-50 to-indigo-50/50 rounded-3xl p-6 sm:p-8 border border-blue-200/60 shadow-sm">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-3 bg-blue-600 text-white rounded-2xl">
+                                <i data-lucide="message-square-heart" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold font-fredoka text-slate-900">Panduan Pertanyaan Pemantik</h3>
+                                <p class="text-xs text-slate-500">Gunakan saat mendampingi anak membaca komik di rumah</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Question Card 1 -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm border border-blue-100 flex gap-3">
+                                <div class="text-blue-600 font-bold font-fredoka text-lg">01</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-blue-900 uppercase tracking-wide">Nilai Kejujuran & Tanggung Jawab</h4>
+                                    <p class="text-sm font-semibold text-slate-800 mt-0.5">"Apa tindakan tokoh komik yang menurutmu paling jujur? Kalau kamu berada di posisi tokoh tersebut, apa yang akan kamu lakukan?"</p>
+                                </div>
+                            </div>
+
+                            <!-- Question Card 2 -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm border border-blue-100 flex gap-3">
+                                <div class="text-blue-600 font-bold font-fredoka text-lg">02</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-blue-900 uppercase tracking-wide">Nilai Gotong Royong</h4>
+                                    <p class="text-sm font-semibold text-slate-800 mt-0.5">"Bagaimana para tokoh di komik bekerjasama untuk memecahkan masalah? Bagaimana kamu bisa membantu temanmu di sekolah seperti itu?"</p>
+                                </div>
+                            </div>
+
+                            <!-- Question Card 3 -->
+                            <div class="bg-white rounded-2xl p-4 shadow-sm border border-blue-100 flex gap-3">
+                                <div class="text-blue-600 font-bold font-fredoka text-lg">03</div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-blue-900 uppercase tracking-wide">Nilai Mandiri & Bernalar Kritis</h4>
+                                    <p class="text-sm font-semibold text-slate-800 mt-0.5">"Pelajaran penting apa yang paling kamu ingat setelah membaca cerita ini? Apa kebaikan yang bisa kita praktekkan besok di rumah?"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORM INPUT REFLEKSI KARAKTER (6 COLS) -->
+                    <div class="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200">
+                        <div class="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+                            <div class="p-3 bg-emerald-100 text-emerald-600 rounded-2xl">
+                                <i data-lucide="clipboard-pen" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold font-fredoka text-slate-800">Form Refleksi Karakter Anak</h3>
+                                <p class="text-xs text-slate-500">Catat perkembangan sikap & karakter anak minggu ini</p>
+                            </div>
+                        </div>
+
+                        <form id="ortu-reflection-form" onsubmit="handleReflectionSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nama Lengkap Anak *</label>
+                                    <input type="text" id="child-name" placeholder="Nama siswa" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Kelas *</label>
+                                    <input type="text" id="child-class" placeholder="Contoh: Kelas 3-B" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nilai Pancasila yang Dipraktikkan *</label>
+                                <select id="child-pancasila-val" required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none transition font-medium">
+                                    <option value="Beriman & Bertakwa kepada Tuhan YME">Beriman & Bertakwa kepada Tuhan YME</option>
+                                    <option value="Gotong Royong & Tolong Menolong">Gotong Royong & Tolong Menolong</option>
+                                    <option value="Kejujuran & Tanggung Jawab">Kejujuran & Tanggung Jawab</option>
+                                    <option value="Kemandirian & Disiplin">Kemandirian & Disiplin</option>
+                                    <option value="Bernalar Kritis & Kreatif">Bernalar Kritis & Kreatif</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Catatan Perkembangan Karakter Anak *</label>
+                                <textarea id="child-notes" rows="3" placeholder="Tuliskan perilaku positif atau perkembangan karakter anak di rumah..." required class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none transition"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2">
+                                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                                <span>Simpan Catatan Refleksi</span>
+                            </button>
+                        </form>
+
+                        <!-- RIWAYAT REFLEKSI SECTION -->
+                        <div class="mt-8 pt-6 border-t border-slate-100">
+                            <h4 class="text-sm font-bold font-fredoka text-slate-800 mb-3 flex items-center gap-2">
+                                <i data-lucide="history" class="w-4 h-4 text-emerald-600"></i> Riwayat Refleksi Tersimpan
+                            </h4>
+                            <div id="reflection-history-list" class="space-y-3 max-h-60 overflow-y-auto pr-1">
+                                <!-- Dynamic Reflections -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- INTERACTIVE COMIC MODAL READER -->
+    <div id="comic-reader-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex-col transition-all duration-300">
+        
+        <!-- Reader Header Controls -->
+        <div class="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between text-white z-20">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-brand-red rounded-xl">
+                    <i data-lucide="book-open" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <h3 id="modal-comic-title" class="font-fredoka text-base sm:text-lg font-bold truncate max-w-[200px] sm:max-w-md">Judul Komik</h3>
+                    <p id="modal-comic-author" class="text-xs text-slate-400">Oleh Guru SD Negeri Pilang 1</p>
+                </div>
+            </div>
+
+            <!-- Display Mode Selector & Controls -->
+            <div class="flex items-center gap-2">
+                
+                <!-- Toggle Mode Group -->
+                <div class="bg-slate-800 p-1 rounded-xl flex items-center border border-slate-700">
+                    <button onclick="setReaderMode('SLIDE')" id="btn-mode-slide" class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-red text-white">
+                        <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+                        <span class="hidden sm:inline">Mode Slide</span>
+                    </button>
+                    <button onclick="setReaderMode('SCROLL')" id="btn-mode-scroll" class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+                        <i data-lucide="scroll" class="w-3.5 h-3.5"></i>
+                        <span class="hidden sm:inline">Mode Gulung</span>
+                    </button>
+                </div>
+
+                <button onclick="closeComicReader()" class="p-2 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Reader Body Area -->
+        <div class="flex-1 overflow-hidden relative flex items-center justify-center p-2 sm:p-4">
+            
+            <!-- MODE 1: SLIDE READER -->
+            <div id="reader-view-slide" class="w-full h-full flex flex-col items-center justify-between max-w-4xl mx-auto">
+                
+                <!-- Main Image Display -->
+                <div class="flex-1 w-full flex items-center justify-center relative overflow-hidden py-2">
+                    <img id="slide-image-display" src="" alt="Halaman Komik" class="max-h-full max-w-full object-contain rounded-xl shadow-2xl transition-all duration-300">
+                </div>
+
+                <!-- Slide Navigation Controls -->
+                <div class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl p-3 flex items-center justify-between max-w-lg shadow-xl">
+                    <button onclick="prevSlide()" id="btn-prev-page" class="p-2.5 bg-slate-800 hover:bg-brand-red disabled:opacity-30 disabled:hover:bg-slate-800 text-white rounded-xl transition flex items-center gap-2 text-xs font-bold">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        <span class="hidden sm:inline">Sebelumnya</span>
+                    </button>
+
+                    <div class="text-center">
+                        <span id="slide-page-counter" class="text-sm font-fredoka font-bold text-white">Halaman 1 / 1</span>
+                    </div>
+
+                    <button onclick="nextSlide()" id="btn-next-page" class="p-2.5 bg-brand-red hover:bg-brand-darkred disabled:opacity-30 disabled:hover:bg-brand-red text-white rounded-xl transition flex items-center gap-2 text-xs font-bold">
+                        <span class="hidden sm:inline">Selanjutnya</span>
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- MODE 2: SCROLL / WEBTOON READER -->
+            <div id="reader-view-scroll" class="hidden w-full h-full overflow-y-auto max-w-2xl mx-auto space-y-4 py-4 pr-2">
+                <div id="scroll-images-container" class="flex flex-col items-center space-y-4">
+                    <!-- Dynamic Stacked Webtoon Images -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        /* GLOBAL APP STATE & STORAGE KEYS */
+        const STORAGE_KEY_COMICS = 'SIKOMPAK_COMICS_DATA_V1';
+        const STORAGE_KEY_REFLECTIONS = 'SIKOMPAK_REFLECTIONS_DATA_V1';
+
+        let currentRole = null; // 'GURU', 'SISWA', 'ORTU'
+        let currentComicList = [];
+        let uploadedFilesBase64 = [];
+        let currentActivePhase = 'ALL';
+
+        // Reader Modal State
+        let activeReaderComic = null;
+        let activeReaderPageIndex = 0;
+        let activeReaderMode = 'SLIDE'; // 'SLIDE' or 'SCROLL'
+
+        /* INITIAL DUMMY COMIC DATA GENERATOR (SVG Data URLs for colorful initial content) */
+        function generateSampleSVG(title, subtitle, pageNum, bgGradient) {
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="850" viewBox="0 0 600 850">
+                <defs>
+                    <linearGradient id="grad${pageNum}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:${bgGradient[0]};stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:${bgGradient[1]};stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="600" height="850" fill="url(#grad${pageNum})" rx="24"/>
+                <circle cx="300" cy="300" r="180" fill="white" opacity="0.15"/>
+                <rect x="40" y="40" width="520" height="770" fill="none" stroke="white" stroke-width="4" stroke-dasharray="12 8" opacity="0.6" rx="16"/>
+                <text x="300" y="120" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28" font-weight="bold">SD NEGERI PILANG 1</text>
+                <text x="300" y="160" text-anchor="middle" fill="#FFE082" font-family="Arial, sans-serif" font-size="20" font-weight="bold">KOMIK KARAKTER PANCASILA</text>
+                
+                <!-- Main Illustration Box -->
+                <rect x="80" y="220" width="440" height="380" fill="#FFFFFF" rx="20" opacity="0.95"/>
+                <circle cx="300" cy="380" r="80" fill="${bgGradient[1]}"/>
+                <text x="300" y="395" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="48">🌟</text>
+                <text x="300" y="520" text-anchor="middle" fill="#1E293B" font-family="Arial, sans-serif" font-size="22" font-weight="bold">${title}</text>
+                <text x="300" y="555" text-anchor="middle" fill="#64748B" font-family="Arial, sans-serif" font-size="16">${subtitle}</text>
+
+                <!-- Footer Comic Dialog Box -->
+                <rect x="80" y="640" width="440" height="120" fill="#FFF9C4" rx="16" stroke="#FBC02D" stroke-width="3"/>
+                <text x="300" y="685" text-anchor="middle" fill="#5D4037" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Halaman ${pageNum}</text>
+                <text x="300" y="720" text-anchor="middle" fill="#795548" font-family="Arial, sans-serif" font-size="15">"Mari selalu menerapkan nilai kebaikan dalam tindakan nyata!"</text>
+            </svg>`;
+            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
+        }
+
+        const defaultDummyComics = [
+            {
+                id: 'dummy-1',
+                title: 'Petualangan Budi & Kejujuran',
+                phase: 'FASE_A',
+                author: 'Ibu Ani, S.Pd',
+                description: 'Belajar berkata jujur saat menemukan dompet terjatuh di halaman sekolah.',
+                pages: [
+                    generateSampleSVG('Petualangan Budi & Kejujuran', 'Fase A (Kelas 1-2)', 1, ['#E53935', '#FF7043']),
+                    generateSampleSVG('Budi Menemukan Dompet', 'Halaman Cerita Pertama', 2, ['#E53935', '#FF7043']),
+                    generateSampleSVG('Mengembalikan Kepada Guru', 'Nilai Kejujuran Pancasila', 3, ['#E53935', '#FF7043'])
+                ],
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: 'dummy-2',
+                title: 'Gotong Royong Membersihkan Kelas',
+                phase: 'FASE_B',
+                author: 'Bapak Ahmad, S.Pd',
+                description: 'Siti dan teman-teman bekerjasama merapikan pojok baca kelas 4.',
+                pages: [
+                    generateSampleSVG('Gotong Royong Kelas', 'Fase B (Kelas 3-4)', 1, ['#1E88E5', '#26C6DA']),
+                    generateSampleSVG('Membagi Tugas Bersama', 'Kerjasama Tim', 2, ['#1E88E5', '#26C6DA']),
+                    generateSampleSVG('Kelas Menjadi Indah', 'Indahnya Kebersamaan', 3, ['#1E88E5', '#26C6DA'])
+                ],
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: 'dummy-3',
+                title: 'Kreatif & Bernalar Kritis',
+                phase: 'FASE_C',
+                author: 'Tim Guru SDN Pilang 1',
+                description: 'Memanfaat barang bekas menjadi media tanam hidroponik sekolah.',
+                pages: [
+                    generateSampleSVG('Inovasi Plastik Bekas', 'Fase C (Kelas 5-6)', 1, ['#43A047', '#66BB6A']),
+                    generateSampleSVG('Diskusi Rancangan', 'Bernalar Kritis', 2, ['#43A047', '#66BB6A'])
+                ],
+                createdAt: new Date().toISOString()
+            }
+        ];
+
+        window.onload = function() {
+            lucide.createIcons();
+            loadComicsFromStorage();
+            loadReflectionsFromStorage();
+        };
+
+        // Load & Save Comics
+        function loadComicsFromStorage() {
+            const saved = localStorage.getItem(STORAGE_KEY_COMICS);
+            if (saved) {
+                try {
+                    currentComicList = JSON.parse(saved);
+                } catch (e) {
+                    currentComicList = defaultDummyComics;
+                }
+            } else {
+                currentComicList = defaultDummyComics;
+                saveComicsToStorage();
+            }
+        }
+
+        function saveComicsToStorage() {
+            localStorage.setItem(STORAGE_KEY_COMICS, JSON.stringify(currentComicList));
+        }
+
+        /* LOGIN & ROLE MANAGEMENT LOGIC */
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                input.type = 'password';
+                icon.setAttribute('data-lucide', 'eye');
+            }
+            lucide.createIcons();
+        }
+
+        function handleGuruLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('guru-password').value;
+            if (pass === 'Pilang1') {
+                loginAsRole('GURU');
+                showToast('Selamat datang, Guru SD Negeri Pilang 1!', 'success');
+            } else {
+                showToast('Password sandi Guru salah! Silakan coba lagi.', 'error');
+            }
+        }
+
+        function loginAsRole(role) {
+            currentRole = role;
+            document.getElementById('login-page').classList.add('hidden');
+            const mainApp = document.getElementById('main-app');
+            mainApp.classList.remove('hidden');
+            mainApp.classList.add('flex');
+
+            // Render Nav Tabs & Active View
+            renderTabNav();
+            switchTab(role.toLowerCase());
+
+            // Update Header Status Badge
+            const badge = document.getElementById('role-badge');
+            const userDisplay = document.getElementById('user-display-name');
+
+            if (role === 'GURU') {
+                badge.textContent = 'GURU / ADMIN';
+                badge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-yellow-400 text-red-950 uppercase tracking-wider';
+                userDisplay.textContent = 'Bapak/Ibu Guru (SDN PILANG 1)';
+            } else if (role === 'SISWA') {
+                badge.textContent = 'SISWA';
+                badge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-400 text-emerald-950 uppercase tracking-wider';
+                userDisplay.textContent = 'Siswa SD Negeri Pilang 1';
+            } else {
+                badge.textContent = 'ORANG TUA';
+                badge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-blue-300 text-blue-950 uppercase tracking-wider';
+                userDisplay.textContent = 'Orang Tua / Wali Murid';
+            }
+
+            // Trigger confetti for student entrance
+            if (role === 'SISWA' && typeof confetti === 'function') {
+                confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+            }
+        }
+
+        function logout() {
+            currentRole = null;
+            document.getElementById('main-app').classList.add('hidden');
+            document.getElementById('main-app').classList.remove('flex');
+            document.getElementById('login-page').classList.remove('hidden');
+            document.getElementById('guru-password').value = '';
+            showToast('Anda telah keluar dari aplikasi.', 'info');
+        }
+
+        function renderTabNav() {
+            const desktopNav = document.getElementById('desktop-tab-nav');
+            const mobileNav = document.getElementById('mobile-tab-nav');
+
+            const tabs = [
+                { id: 'siswa', label: 'Portal Siswa', icon: 'smile', roles: ['GURU', 'SISWA', 'ORTU'] },
+                { id: 'guru', label: 'Portal Guru', icon: 'user-cog', roles: ['GURU'] },
+                { id: 'ortu', label: 'Portal Orang Tua', icon: 'heart-handshake', roles: ['GURU', 'ORTU'] }
+            ];
+
+            let desktopHTML = '';
+            let mobileHTML = '';
+
+            tabs.forEach(tab => {
+                if (tab.roles.includes(currentRole)) {
+                    desktopHTML += `
+                        <button onclick="switchTab('${tab.id}')" id="tab-btn-desktop-${tab.id}" class="tab-btn-desktop px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-white/80 hover:text-white hover:bg-white/10">
+                            <i data-lucide="${tab.icon}" class="w-4 h-4"></i>
+                            <span>${tab.label}</span>
+                        </button>
+                    `;
+                    mobileHTML += `
+                        <button onclick="switchTab('${tab.id}')" id="tab-btn-mobile-${tab.id}" class="tab-btn-mobile px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-white/80 whitespace-nowrap">
+                            <i data-lucide="${tab.icon}" class="w-3.5 h-3.5"></i>
+                            <span>${tab.label}</span>
+                        </button>
+                    `;
+                }
+            });
+
+            desktopNav.innerHTML = desktopHTML;
+            mobileNav.innerHTML = mobileHTML;
+            lucide.createIcons();
+        }
+
+        function switchTab(tabId) {
+            // Hide all tab sections
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // Show selected tab
+            const activeSection = document.getElementById(`tab-${tabId}`);
+            if (activeSection) {
+                activeSection.classList.remove('hidden');
+                activeSection.classList.add('fade-in-scale');
+            }
+
+            // Update tab button styles
+            document.querySelectorAll('.tab-btn-desktop, .tab-btn-mobile').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-brand-red', 'shadow');
+                btn.classList.add('text-white/80');
+            });
+
+            const activeDesktopBtn = document.getElementById(`tab-btn-desktop-${tabId}`);
+            const activeMobileBtn = document.getElementById(`tab-btn-mobile-${tabId}`);
+
+            if (activeDesktopBtn) {
+                activeDesktopBtn.classList.add('bg-white', 'text-brand-red', 'shadow');
+                activeDesktopBtn.classList.remove('text-white/80');
+            }
+            if (activeMobileBtn) {
+                activeMobileBtn.classList.add('bg-white', 'text-brand-red', 'shadow');
+                activeMobileBtn.classList.remove('text-white/80');
+            }
+
+            // Refresh tab views
+            if (tabId === 'siswa') renderSiswaCatalog();
+            if (tabId === 'guru') renderGuruDashboard();
+            if (tabId === 'ortu') renderOrtuDashboard();
+        }
+
+        function handleFilePreview(event) {
+            const files = Array.from(event.target.files);
+            if (!files || files.length === 0) return;
+
+            uploadedFilesBase64 = [];
+            const container = document.getElementById('preview-area-container');
+            const grid = document.getElementById('preview-thumbnails-grid');
+            const countLabel = document.getElementById('preview-count');
+
+            grid.innerHTML = '';
+            container.classList.remove('hidden');
+            countLabel.textContent = files.length;
+
+            let loadedCount = 0;
+
+            files.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64 = e.target.result;
+                    uploadedFilesBase64[index] = base64;
+
+                    const thumbDiv = document.createElement('div');
+                    thumbDiv.className = `relative rounded-xl overflow-hidden border-2 shadow-sm ${index === 0 ? 'border-brand-red ring-2 ring-red-200' : 'border-slate-200'}`;
+                    thumbDiv.innerHTML = `
+                        <img src="${base64}" class="w-full h-24 object-cover">
+                        <span class="absolute bottom-1 left-1 bg-black/70 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">Hlm ${index + 1}</span>
+                        ${index === 0 ? '<span class="absolute top-1 right-1 bg-brand-red text-white text-[9px] font-bold px-1 rounded">Sampul</span>' : ''}
+                    `;
+                    grid.appendChild(thumbDiv);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function handleComicUpload(e) {
+            e.preventDefault();
+            if (uploadedFilesBase64.length === 0) {
+                showToast('Pilih setidaknya 1 gambar halaman komik!', 'error');
+                return;
+            }
+
+            const title = document.getElementById('comic-title').value.trim();
+            const phase = document.getElementById('comic-phase').value;
+            const author = document.getElementById('comic-author').value.trim();
+            const description = document.getElementById('comic-description').value.trim();
+
+            const newComic = {
+                id: 'comic-' + Date.now(),
+                title: title,
+                phase: phase,
+                author: author,
+                description: description,
+                pages: [...uploadedFilesBase64],
+                createdAt: new Date().toISOString()
+            };
+
+            currentComicList.unshift(newComic);
+            saveComicsToStorage();
+
+            // Reset form
+            document.getElementById('upload-comic-form').reset();
+            document.getElementById('preview-area-container').classList.add('hidden');
+            uploadedFilesBase64 = [];
+
+            showToast('Komik berhasil diterbitkan!', 'success');
+            renderGuruDashboard();
+        }
+
+        function deleteComic(comicId) {
+            if (confirm('Apakah Anda yakin ingin menghapus komik ini?')) {
+                currentComicList = currentComicList.filter(c => c.id !== comicId);
+                saveComicsToStorage();
+                renderGuruDashboard();
+                showToast('Komik telah dihapus.', 'info');
+            }
+        }
+
+        function renderGuruDashboard() {
+            // Update stats
+            document.getElementById('stat-total-komik').textContent = currentComicList.length;
+            document.getElementById('stat-fase-a').textContent = currentComicList.filter(c => c.phase === 'FASE_A').length;
+            document.getElementById('stat-fase-b').textContent = currentComicList.filter(c => c.phase === 'FASE_B').length;
+            document.getElementById('stat-fase-c').textContent = currentComicList.filter(c => c.phase === 'FASE_C').length;
+
+            document.getElementById('rekap-count').textContent = currentComicList.length;
+
+            const listContainer = document.getElementById('guru-comics-list');
+            if (currentComicList.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">Belum ada komik yang diunggah.</p>`;
+                return;
+            }
+
+            let html = '';
+            currentComicList.forEach(c => {
+                const phaseLabel = c.phase === 'FASE_A' ? 'Fase A' : c.phase === 'FASE_B' ? 'Fase B' : 'Fase C';
+                const phaseBg = c.phase === 'FASE_A' ? 'bg-red-100 text-red-700' : c.phase === 'FASE_B' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700';
+
+                html += `
+                    <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between gap-3 hover:bg-slate-100/80 transition">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <img src="${c.pages[0]}" class="w-12 h-14 object-cover rounded-lg border border-slate-300 flex-shrink-0">
+                            <div class="min-w-0">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${phaseBg}">${phaseLabel}</span>
+                                <h4 class="text-xs font-bold text-slate-800 truncate mt-0.5">${c.title}</h4>
+                                <p class="text-[11px] text-slate-500">${c.pages.length} Halaman • Oleh: ${c.author}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="openComicReader('${c.id}')" title="Preview Komik" class="p-2 bg-blue-100 text-blue-600 hover:bg-blue-200 rounded-xl transition">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="deleteComic('${c.id}')" title="Hapus Komik" class="p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-xl transition">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            listContainer.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function filterPhase(phase) {
+            currentActivePhase = phase;
+
+            document.querySelectorAll('.phase-filter-btn').forEach(btn => {
+                btn.className = 'phase-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 hover:bg-slate-100';
+            });
+
+            const activeBtn = document.getElementById(`filter-btn-${phase}`);
+            if (activeBtn) {
+                activeBtn.className = 'phase-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-brand-red text-white shadow';
+            }
+
+            renderSiswaCatalog();
+        }
+
+        function renderSiswaCatalog() {
+            const grid = document.getElementById('comic-grid-siswa');
+            const emptyMsg = document.getElementById('empty-siswa-comics');
+
+            let filtered = currentComicList;
+            if (currentActivePhase !== 'ALL') {
+                filtered = currentComicList.filter(c => c.phase === currentActivePhase);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyMsg.classList.remove('hidden');
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            let html = '';
+
+            filtered.forEach(c => {
+                const phaseLabel = c.phase === 'FASE_A' ? 'Fase A (Kelas 1-2)' : c.phase === 'FASE_B' ? 'Fase B (Kelas 3-4)' : 'Fase C (Kelas 5-6)';
+                const phaseBadgeBg = c.phase === 'FASE_A' ? 'bg-red-500' : c.phase === 'FASE_B' ? 'bg-amber-500' : 'bg-emerald-600';
+
+                html += `
+                    <div onclick="openComicReader('${c.id}')" class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer flex flex-col group">
+                        
+                        <!-- Thumbnail Cover -->
+                        <div class="relative h-56 w-full bg-slate-100 overflow-hidden">
+                            <img src="${c.pages[0]}" alt="${c.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 text-[10px] font-bold px-3 py-1 rounded-full text-white shadow ${phaseBadgeBg}">
+                                ${phaseLabel}
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                                <i data-lucide="layers" class="w-3 h-3"></i> ${c.pages.length} Halaman
+                            </span>
+                        </div>
+
+                        <!-- Content Details -->
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-3">
+                            <div>
+                                <h3 class="font-fredoka text-base font-bold text-slate-900 group-hover:text-brand-red transition-colors line-clamp-2">
+                                    ${c.title}
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-1 line-clamp-2">
+                                    ${c.description}
+                                </p>
+                            </div>
+
+                            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
+                                <span>Oleh: <strong class="text-slate-600">${c.author}</strong></span>
+                                <span class="text-brand-red font-bold group-hover:translate-x-1 transition-transform inline-flex items-center gap-0.5">
+                                    Baca <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+            });
+
+            grid.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function openComicReader(comicId) {
+            activeReaderComic = currentComicList.find(c => c.id === comicId);
+            if (!activeReaderComic) return;
+
+            activeReaderPageIndex = 0;
+            activeReaderMode = 'SLIDE';
+
+            document.getElementById('modal-comic-title').textContent = activeReaderComic.title;
+            document.getElementById('modal-comic-author').textContent = `Oleh: ${activeReaderComic.author}`;
+
+            document.getElementById('comic-reader-modal').classList.remove('hidden');
+            document.getElementById('comic-reader-modal').classList.add('flex');
+
+            setReaderMode('SLIDE');
+        }
+
+        function closeComicReader() {
+            document.getElementById('comic-reader-modal').classList.add('hidden');
+            document.getElementById('comic-reader-modal').classList.remove('flex');
+            activeReaderComic = null;
+        }
+
+        function setReaderMode(mode) {
+            activeReaderMode = mode;
+            const btnSlide = document.getElementById('btn-mode-slide');
+            const btnScroll = document.getElementById('btn-mode-scroll');
+
+            const slideView = document.getElementById('reader-view-slide');
+            const scrollView = document.getElementById('reader-view-scroll');
+
+            if (mode === 'SLIDE') {
+                btnSlide.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-red text-white';
+                btnScroll.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white';
+
+                slideView.classList.remove('hidden');
+                slideView.classList.add('flex');
+                scrollView.classList.add('hidden');
+
+                updateSlideView();
+            } else {
+                btnScroll.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-brand-red text-white';
+                btnSlide.className = 'px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white';
+
+                slideView.classList.add('hidden');
+                slideView.classList.remove('flex');
+                scrollView.classList.remove('hidden');
+
+                renderScrollView();
+            }
+        }
+
+        function updateSlideView() {
+            if (!activeReaderComic) return;
+
+            const imgDisplay = document.getElementById('slide-image-display');
+            const counter = document.getElementById('slide-page-counter');
+            const btnPrev = document.getElementById('btn-prev-page');
+            const btnNext = document.getElementById('btn-next-page');
+
+            imgDisplay.src = activeReaderComic.pages[activeReaderPageIndex];
+            counter.textContent = `Halaman ${activeReaderPageIndex + 1} / ${activeReaderComic.pages.length}`;
+
+            btnPrev.disabled = activeReaderPageIndex === 0;
+            btnNext.disabled = activeReaderPageIndex === activeReaderComic.pages.length - 1;
+        }
+
+        function prevSlide() {
+            if (activeReaderPageIndex > 0) {
+                activeReaderPageIndex--;
+                updateSlideView();
+            }
+        }
+
+        function nextSlide() {
+            if (activeReaderComic && activeReaderPageIndex < activeReaderComic.pages.length - 1) {
+                activeReaderPageIndex++;
+                updateSlideView();
+            }
+        }
+
+        function renderScrollView() {
+            if (!activeReaderComic) return;
+            const container = document.getElementById('scroll-images-container');
+
+            let html = '';
+            activeReaderComic.pages.forEach((pageSrc, idx) => {
+                html += `
+                    <div class="relative w-full bg-slate-900 rounded-xl overflow-hidden shadow-xl border border-slate-800">
+                        <img src="${pageSrc}" class="w-full h-auto object-contain">
+                        <span class="absolute top-2 right-2 bg-black/70 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Halaman ${idx + 1}</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function handleReflectionSubmit(e) {
+            e.preventDefault();
+            const childName = document.getElementById('child-name').value.trim();
+            const childClass = document.getElementById('child-class').value.trim();
+            const pancasilaVal = document.getElementById('child-pancasila-val').value;
+            const notes = document.getElementById('child-notes').value.trim();
+
+            const reflection = {
+                id: 'ref-' + Date.now(),
+                childName,
+                childClass,
+                pancasilaVal,
+                notes,
+                date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+            };
+
+            const saved = getReflections();
+            saved.unshift(reflection);
+            localStorage.setItem(STORAGE_KEY_REFLECTIONS, JSON.stringify(saved));
+
+            document.getElementById('ortu-reflection-form').reset();
+            showToast('Catatan refleksi berhasil disimpan!', 'success');
+            renderOrtuDashboard();
+        }
+
+        function getReflections() {
+            const saved = localStorage.getItem(STORAGE_KEY_REFLECTIONS);
+            return saved ? JSON.parse(saved) : [];
+        }
+
+        function renderOrtuDashboard() {
+            const reflections = getReflections();
+            const container = document.getElementById('reflection-history-list');
+
+            if (reflections.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Belum ada riwayat refleksi tersimpan.</p>`;
+                return;
+            }
+
+            let html = '';
+            reflections.forEach(r => {
+                html += `
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+                        <div class="flex items-center justify-between mb-1">
+                            <strong class="text-xs font-bold text-slate-800">${r.childName} (${r.childClass})</strong>
+                            <span class="text-[10px] text-slate-400">${r.date}</span>
+                        </div>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 inline-block mb-1.5">
+                            ${r.pancasilaVal}
+                        </span>
+                        <p class="text-xs text-slate-600 italic">"${r.notes}"</p>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function loadReflectionsFromStorage() {
+            renderOrtuDashboard();
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+
+            const bgClass = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-brand-red' : 'bg-slate-800';
+            const iconName = type === 'success' ? 'check-circle' : type === 'error' ? 'alert-circle' : 'info';
+
+            toast.className = `${bgClass} text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2 pointer-events-auto fade-in-scale border border-white/20`;
+            toast.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i><span>${message}</span>`;
+
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(-10px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
